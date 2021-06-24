@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import Banco_dados.ClasseConexao;
 
 public class Alterar {
-
+	//outra funcao main
 	public static void main(String[] args) {
 		Connection conexao =   null;
 		PreparedStatement  comando  =  null;

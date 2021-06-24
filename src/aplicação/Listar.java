@@ -8,7 +8,8 @@ import java.sql.Statement;
 import Banco_dados.ClasseConexao;
 
 public class Listar {
-	// primeira função main
+	// primeira função main 
+	//Mas eu ja tinha declarado
 	public static void main(String[] args) {
 
 		Connection conexao =   null;
