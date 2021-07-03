@@ -29,7 +29,7 @@ public class ClasseConexao {
 		try {
 			if(c!=null) {
 				c.close();
-				conexao=null;
+				conexao = null;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
