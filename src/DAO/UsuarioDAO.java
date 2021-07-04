@@ -45,4 +45,39 @@ public class UsuarioDAO {
 			
 	}
 	
+	public int getNextCodigo() {
+		Connection conexao =   null;
+		Statement  comando  =  null;
+		ResultSet  resultado = null;
+		int nextCodigo=0;
+		
+		try {
+			
+			conexao = ClasseConexao.Conectar();
+			comando = conexao.createStatement();
+			String meu_sql ="SELECT * FROM carros";
+			resultado = comando.executeQuery(meu_sql);
+			if(resultado != null) {
+				nextCodigo = (int) resultado.getObject(1);
+				nextCodigo++;
+		}
+			else{
+				nextCodigo = 0;
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			ClasseConexao.FecharConexao(conexao);
+			try {
+				comando.close();
+				resultado.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return nextCodigo;
+	}
 }

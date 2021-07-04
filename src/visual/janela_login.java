@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Banco_dados.ClasseConexao;
@@ -64,7 +65,7 @@ public class janela_login {
 		frmRentIt.getContentPane().add(txt_usuario);
 		txt_usuario.setColumns(10);
 		
-		txt_senha = new JTextField();
+		txt_senha = new JPasswordField();
 		txt_senha.setText("Senha");
 		txt_senha.setBounds(161, 143, 98, 20);
 		frmRentIt.getContentPane().add(txt_senha);
@@ -76,7 +77,7 @@ public class janela_login {
 				//Ação do Login
 				boolean logou = login();
 				if (logou == true){
-					janela_home janela_home = new janela_home();
+					janela_home_admin janela_home = new janela_home_admin();
 					janela_home.main(null);
 				}
 			}
@@ -97,7 +98,7 @@ public class janela_login {
 	
 	private boolean login() {
 		
-		String nome 	= txt_usuario.getText();
+		String usuario 	= txt_usuario.getText();
 		String senha 	= txt_senha.getText();
 				
 			Connection conexao =   null;
@@ -107,9 +108,9 @@ public class janela_login {
 			try {
 				
 				conexao = ClasseConexao.Conectar();
-				String meu_sql ="SELECT * FROM usuarios WHERE nome = ? AND senha = ? ";
+				String meu_sql ="SELECT * FROM usuarios WHERE usuario = ? AND senha = ? ";
 				comando = conexao.prepareStatement(meu_sql, Statement.RETURN_GENERATED_KEYS);
-				comando.setString(1, nome);
+				comando.setString(1, usuario);
 				comando.setString(2, senha);
 						
 				resultado = comando.executeQuery();

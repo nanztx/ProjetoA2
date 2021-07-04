@@ -1,21 +1,22 @@
 package aplicação;
 
 public class Usuario {
-	
-	private int id;
-	private String login;
+	//Atrubutos
+	private int codigo;
+	private String nome;
 	private String senha;
-	public int getId() {
-		return id;
+	//Métodos getters setters
+	public int getcodigo() {
+		return codigo;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
-	public String getLogin() {
-		return login;
+	public String getNome() {
+		return nome;
 	}
-	public void setLogin(String login) {
-		this.login = login;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	public String getSenha() {
 		return senha;
@@ -23,5 +24,29 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	//Métodos da classe
+	public void construtor() {
+		
+	}
+	
+	public void cadastraUsuario(int codigo) {
+			
+		this.nome = getNome();
+		
+	}
+	
+	public void alteraUsuario(int id) {
+		
+		
+	}
+	
+	public void excluiUsuario(int id) {
+		
+		
+	}
+	
+	public void alteraSenha(int id) {
+		
+	}
+	
 }
