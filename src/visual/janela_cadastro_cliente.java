@@ -26,7 +26,7 @@ import Banco_dados.ClasseConexao;
 
 public class janela_cadastro_cliente {
 
-	private JFrame frame;
+	private JFrame frmRentIt;
 	private JTextField txt_nome;
 	private JTextField txt_email;
 	private JTextField txt_codusuario;
@@ -46,7 +46,7 @@ public class janela_cadastro_cliente {
 			public void run() {
 				try {
 					janela_cadastro_cliente window = new janela_cadastro_cliente();
-					window.frame.setVisible(true);
+					window.frmRentIt.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,60 +66,61 @@ public class janela_cadastro_cliente {
 	 */
 	@SuppressWarnings("unchecked")
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 565, 336);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmRentIt = new JFrame();
+		frmRentIt.setTitle("RENT IT - Cadastro de Usu\u00E1rio");
+		frmRentIt.setBounds(100, 100, 565, 336);
+		frmRentIt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmRentIt.getContentPane().setLayout(null);
 		
 		JLabel lbl_cadastroUsuario = new JLabel("CADASTRO DE USU\u00C1RIO");
 		lbl_cadastroUsuario.setFont(new Font("Calibri", Font.BOLD, 14));
 		lbl_cadastroUsuario.setBounds(10, 11, 194, 24);
-		frame.getContentPane().add(lbl_cadastroUsuario);
+		frmRentIt.getContentPane().add(lbl_cadastroUsuario);
 		
 		JLabel lbl_nome = new JLabel("Nome:");
 		lbl_nome.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lbl_nome.setBounds(10, 104, 47, 24);
-		frame.getContentPane().add(lbl_nome);
+		frmRentIt.getContentPane().add(lbl_nome);
 		
 		JLabel lbl_cpf = new JLabel("CPF:");
 		lbl_cpf.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lbl_cpf.setBounds(10, 139, 47, 24);
-		frame.getContentPane().add(lbl_cpf);
+		frmRentIt.getContentPane().add(lbl_cpf);
 		
 		JLabel lbl_dtnascmento = new JLabel("Data Nascimento:");
 		lbl_dtnascmento.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lbl_dtnascmento.setBounds(10, 173, 109, 24);
-		frame.getContentPane().add(lbl_dtnascmento);
+		frmRentIt.getContentPane().add(lbl_dtnascmento);
 		
 		JLabel lbl_dtcadastro = new JLabel("Data Cadastro:");
 		lbl_dtcadastro.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lbl_dtcadastro.setBounds(10, 208, 98, 24);
-		frame.getContentPane().add(lbl_dtcadastro);
+		frmRentIt.getContentPane().add(lbl_dtcadastro);
 		
 		JLabel lbl_email = new JLabel("Email:");
 		lbl_email.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lbl_email.setBounds(316, 74, 47, 24);
-		frame.getContentPane().add(lbl_email);
+		frmRentIt.getContentPane().add(lbl_email);
 		
 		JLabel lbl_celular = new JLabel("Celular:");
 		lbl_celular.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lbl_celular.setBounds(316, 104, 47, 24);
-		frame.getContentPane().add(lbl_celular);
+		frmRentIt.getContentPane().add(lbl_celular);
 		
 		JLabel lbl_codusuario = new JLabel("C\u00F3digo de Usu\u00E1rio:");
 		lbl_codusuario.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lbl_codusuario.setBounds(316, 139, 109, 24);
-		frame.getContentPane().add(lbl_codusuario);
+		frmRentIt.getContentPane().add(lbl_codusuario);
 		
 		txt_nome = new JTextField();
 		txt_nome.setBounds(57, 104, 234, 20);
-		frame.getContentPane().add(txt_nome);
+		frmRentIt.getContentPane().add(txt_nome);
 		txt_nome.setColumns(10);
 		
 		txt_email = new JTextField();
 		txt_email.setColumns(10);
 		txt_email.setBounds(373, 74, 148, 20);
-		frame.getContentPane().add(txt_email);
+		frmRentIt.getContentPane().add(txt_email);
 		
 		txt_codusuario = new JTextField();
 		txt_codusuario.setEditable(false);
@@ -127,17 +128,17 @@ public class janela_cadastro_cliente {
 		txt_codusuario.setText(texto);
 		txt_codusuario.setColumns(10);
 		txt_codusuario.setBounds(435, 139, 86, 20);
-		frame.getContentPane().add(txt_codusuario);
+		frmRentIt.getContentPane().add(txt_codusuario);
 		
 		JButton btnNewButton = new JButton("Cancelar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
+				frmRentIt.dispose();
 				janela_home_admin.main(null);
 			}
 		});
 		btnNewButton.setBounds(129, 263, 89, 23);
-		frame.getContentPane().add(btnNewButton);
+		frmRentIt.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Cadastrar");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -147,17 +148,17 @@ public class janela_cadastro_cliente {
 			}
 		});
 		btnNewButton_1.setBounds(316, 263, 89, 23);
-		frame.getContentPane().add(btnNewButton_1);
+		frmRentIt.getContentPane().add(btnNewButton_1);
 		
 		JLabel lbl_usuario = new JLabel("Usu\u00E1rio");
 		lbl_usuario.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lbl_usuario.setBounds(10, 69, 47, 24);
-		frame.getContentPane().add(lbl_usuario);
+		frmRentIt.getContentPane().add(lbl_usuario);
 		
 		txt_usuario = new JTextField();
 		txt_usuario.setColumns(10);
 		txt_usuario.setBounds(57, 69, 158, 20);
-		frame.getContentPane().add(txt_usuario);
+		frmRentIt.getContentPane().add(txt_usuario);
 		
 		try {
 			txt_celular = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
@@ -167,7 +168,7 @@ public class janela_cadastro_cliente {
 			e1.printStackTrace();
 		}
 		txt_celular.setBounds(373, 104, 148, 20);
-		frame.getContentPane().add(txt_celular);
+		frmRentIt.getContentPane().add(txt_celular);
 		
 		try {
 			txt_cpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
@@ -177,7 +178,7 @@ public class janela_cadastro_cliente {
 			e1.printStackTrace();
 		}
 		txt_cpf.setBounds(56, 139, 158, 20);
-		frame.getContentPane().add(txt_cpf);
+		frmRentIt.getContentPane().add(txt_cpf);
 		
 		
 		try {
@@ -188,7 +189,7 @@ public class janela_cadastro_cliente {
 			e1.printStackTrace();
 		}
 		txt_dtnascimento.setBounds(129, 173, 86, 20);
-		frame.getContentPane().add(txt_dtnascimento);
+		frmRentIt.getContentPane().add(txt_dtnascimento);
 		
 		LocalDate datahoje = LocalDate.now(); 
 		String dthoje = datahoje.toString();
@@ -204,7 +205,7 @@ public class janela_cadastro_cliente {
 			e1.printStackTrace();
 		}
 		txt_dtcadastro.setBounds(129, 208, 86, 20);
-		frame.getContentPane().add(txt_dtcadastro);
+		frmRentIt.getContentPane().add(txt_dtcadastro);
 		
 		listarPermissoes();
 		PermissaoBox = new JComboBox<>();
@@ -215,14 +216,13 @@ public class janela_cadastro_cliente {
         	PermissaoBox.setSelectedItem(null);
         }
         PermissaoBox.action(null, PermissaoBox);
-        PermissaoBox.setBounds(435, 172, 86, 22);
-        frame.getContentPane().add(PermissaoBox);
-       /* if((String)PermissaoBox.getSelectItem()!=null) {
-        	PermissaoBox.setEnable(true);
-        }
-        else {
-        	PermissaoBox.setEnabled(false);
-        }*/
+        PermissaoBox.setBounds(393, 172, 128, 22);
+        frmRentIt.getContentPane().add(PermissaoBox);
+        
+        JLabel lbl_permissao = new JLabel("Permiss\u00E3o:");
+        lbl_permissao.setFont(new Font("Calibri", Font.PLAIN, 14));
+        lbl_permissao.setBounds(316, 173, 67, 24);
+        frmRentIt.getContentPane().add(lbl_permissao);
 
         
 	}
@@ -286,7 +286,7 @@ public class janela_cadastro_cliente {
 				if(resultado.next()) {
 					//System.out.println("dados gravados no codigo:" + resultado.getInt(1));
 					JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
-					frame.dispose();
+					frmRentIt.dispose();
 					janela_home_admin.main(null);
 				}
 			}

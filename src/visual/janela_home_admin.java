@@ -80,6 +80,8 @@ public class janela_home_admin {
 		JButton btn_alterarUsuario = new JButton("Alterar Usu\u00E1rio");
 		btn_alterarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmRentIt.dispose();
+				janela_altera_usuario.main(null);
 			}
 		});
 		btn_alterarUsuario.setBounds(10, 86, 128, 23);

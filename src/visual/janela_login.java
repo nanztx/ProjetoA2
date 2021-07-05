@@ -75,11 +75,19 @@ public class janela_login {
 		btn_login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Ação do Login
-				boolean logou = login();
-				if (logou == true){
+				 String logou = login();
+				if (logou == "ADMIN"){
 					frmRentIt.dispose();
 					janela_home_admin janela_home = new janela_home_admin();
 					janela_home.main(null);
+				}
+				else if(logou == "CLIENTE"){
+					frmRentIt.dispose();
+					janela_home_cliente janela_home_cli = new janela_home_cliente();
+					janela_home_cli.main(null);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Usuário sem permissão definida. Informe o Administrador!");
 				}
 			}
 		});
@@ -97,15 +105,18 @@ public class janela_login {
 		frmRentIt.getContentPane().add(lbl_senha);
 	}
 	
-	private boolean login() {
+	private String login() {
 		
 		String usuario 	= txt_usuario.getText();
 		String senha 	= txt_senha.getText();
-				
+		String admin 	=	"ADMIN";
+		String cliente 	="CLIENTE";
+		String autentica = "";	
+		
 			Connection conexao =   null;
 			ResultSet  resultado = null;
 			PreparedStatement  comando  =  null;
-			boolean autentica = false;
+			
 			try {
 				
 				conexao = ClasseConexao.Conectar();
@@ -119,7 +130,13 @@ public class janela_login {
 				if (resultado.next() == true) {
 					//System.out.println(resultado.getInt("codigo")+ "  "+ resultado.getString("nome")+"  "+ resultado.getString("senha"));
 					JOptionPane.showMessageDialog(null, "Bem Vindo " + resultado.getString(2) + "!");
-					autentica = true;
+					if (resultado.getString(4).trim().equals(admin.trim()) ) {
+						autentica = admin;
+					}
+					else if(resultado.getString(4).trim().equals(admin.trim()) ){
+						autentica = cliente;
+					}
+					
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Login não autenticado!");
