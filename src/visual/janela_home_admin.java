@@ -74,7 +74,7 @@ public class janela_home_admin {
 				janela_cadastro_cliente.main(null);				
 			}
 		});
-		btn_cadastrarUsuario.setBounds(10, 52, 128, 23);
+		btn_cadastrarUsuario.setBounds(10, 52, 167, 23);
 		frmRentIt.getContentPane().add(btn_cadastrarUsuario);
 		
 		JButton btn_alterarUsuario = new JButton("Alterar Usu\u00E1rio");
@@ -84,19 +84,19 @@ public class janela_home_admin {
 				janela_altera_usuario.main(null);
 			}
 		});
-		btn_alterarUsuario.setBounds(10, 86, 128, 23);
+		btn_alterarUsuario.setBounds(10, 86, 167, 23);
 		frmRentIt.getContentPane().add(btn_alterarUsuario);
 		
 		JButton btn_removerUsuario = new JButton("Remover Usu\u00E1rio");
-		btn_removerUsuario.setBounds(10, 120, 128, 23);
+		btn_removerUsuario.setBounds(10, 120, 167, 23);
 		frmRentIt.getContentPane().add(btn_removerUsuario);
 		
 		JButton btn_cadastrarVeiculo = new JButton("Cadastrar Ve\u00EDculo");
-		btn_cadastrarVeiculo.setBounds(10, 202, 128, 23);
+		btn_cadastrarVeiculo.setBounds(10, 202, 167, 23);
 		frmRentIt.getContentPane().add(btn_cadastrarVeiculo);
 		
 		JButton btn_cadastrarUsuario_4 = new JButton("Alterar Ve\u00EDculo");
-		btn_cadastrarUsuario_4.setBounds(10, 236, 128, 23);
+		btn_cadastrarUsuario_4.setBounds(10, 236, 167, 23);
 		frmRentIt.getContentPane().add(btn_cadastrarUsuario_4);
 		
 		JButton btn_removerVeiculo = new JButton("Remover Ve\u00EDculo");
@@ -104,7 +104,7 @@ public class janela_home_admin {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btn_removerVeiculo.setBounds(10, 270, 128, 23);
+		btn_removerVeiculo.setBounds(10, 270, 167, 23);
 		frmRentIt.getContentPane().add(btn_removerVeiculo);
 		
 		JButton btn_cadastrarAgenda = new JButton("Cadastrar Agenda");
@@ -112,15 +112,15 @@ public class janela_home_admin {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btn_cadastrarAgenda.setBounds(257, 52, 128, 23);
+		btn_cadastrarAgenda.setBounds(257, 52, 167, 23);
 		frmRentIt.getContentPane().add(btn_cadastrarAgenda);
 		
 		JButton btn_alterarAgenda = new JButton("Alterar Agenda");
-		btn_alterarAgenda.setBounds(257, 86, 128, 23);
+		btn_alterarAgenda.setBounds(257, 86, 167, 23);
 		frmRentIt.getContentPane().add(btn_alterarAgenda);
 		
 		JButton btn_removerAgenda = new JButton("Remover Agenda");
-		btn_removerAgenda.setBounds(257, 120, 128, 23);
+		btn_removerAgenda.setBounds(257, 120, 167, 23);
 		frmRentIt.getContentPane().add(btn_removerAgenda);
 	}
 }
