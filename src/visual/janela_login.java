@@ -77,6 +77,7 @@ public class janela_login {
 				//Ação do Login
 				boolean logou = login();
 				if (logou == true){
+					frmRentIt.dispose();
 					janela_home_admin janela_home = new janela_home_admin();
 					janela_home.main(null);
 				}

@@ -17,7 +17,7 @@ public class janela_home_admin {
 	/**
 	 * Launch the application.
 	 */
-	public void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -70,6 +70,7 @@ public class janela_home_admin {
 		JButton btn_cadastrarUsuario = new JButton("Cadastrar Usu\u00E1rio");
 		btn_cadastrarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmRentIt.dispose();
 				janela_cadastro_cliente.main(null);				
 			}
 		});

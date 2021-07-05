@@ -1,39 +1,43 @@
 package visual;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
-import javax.swing.JTextField;
-
-import Banco_dados.ClasseConexao;
-
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.awt.event.ActionEvent;
-
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Random;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
+
+import Banco_dados.ClasseConexao;
 
 public class janela_cadastro_cliente {
 
 	private JFrame frame;
 	private JTextField txt_nome;
-	private JTextField txt_cpf;
-	private JTextField txt_dtnascimento;
-	private JTextField txt_dtcadastro;
 	private JTextField txt_email;
-	private JTextField txt_celular;
 	private JTextField txt_codusuario;
 	private JTextField txt_usuario;
-
+	private JFormattedTextField txt_celular = null;
+	private JFormattedTextField txt_cpf = null;
+	private JFormattedTextField txt_dtnascimento = null;
+	private JFormattedTextField txt_dtcadastro = null;
+	private JComboBox<String> PermissaoBox;
+	public int cont=0;
+	public String listarPermissoes[] = new String[100];
 	/**
 	 * Launch the application.
 	 */
@@ -60,6 +64,7 @@ public class janela_cadastro_cliente {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 565, 336);
@@ -111,40 +116,27 @@ public class janela_cadastro_cliente {
 		frame.getContentPane().add(txt_nome);
 		txt_nome.setColumns(10);
 		
-		txt_cpf = new JTextField();
-		txt_cpf.setColumns(10);
-		txt_cpf.setBounds(57, 139, 158, 20);
-		frame.getContentPane().add(txt_cpf);
-		
-		txt_dtnascimento = new JTextField();
-		txt_dtnascimento.setColumns(10);
-		txt_dtnascimento.setBounds(129, 173, 86, 20);
-		frame.getContentPane().add(txt_dtnascimento);
-		
-		txt_dtcadastro = new JTextField();
-		txt_dtcadastro.setToolTipText("");
-		txt_dtcadastro.setText("\t");
-		txt_dtcadastro.setColumns(10);
-		txt_dtcadastro.setBounds(129, 208, 86, 20);
-		frame.getContentPane().add(txt_dtcadastro);
-		
 		txt_email = new JTextField();
 		txt_email.setColumns(10);
 		txt_email.setBounds(373, 74, 148, 20);
 		frame.getContentPane().add(txt_email);
 		
-		txt_celular = new JTextField();
-		txt_celular.setColumns(10);
-		txt_celular.setBounds(373, 104, 148, 20);
-		frame.getContentPane().add(txt_celular);
-		
 		txt_codusuario = new JTextField();
+		txt_codusuario.setEditable(false);
+		String texto = pegaProxId();
+		txt_codusuario.setText(texto);
 		txt_codusuario.setColumns(10);
 		txt_codusuario.setBounds(435, 139, 86, 20);
 		frame.getContentPane().add(txt_codusuario);
 		
 		JButton btnNewButton = new JButton("Cancelar");
-		btnNewButton.setBounds(126, 263, 89, 23);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				janela_home_admin.main(null);
+			}
+		});
+		btnNewButton.setBounds(129, 263, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Cadastrar");
@@ -154,7 +146,7 @@ public class janela_cadastro_cliente {
 				
 			}
 		});
-		btnNewButton_1.setBounds(373, 263, 89, 23);
+		btnNewButton_1.setBounds(316, 263, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JLabel lbl_usuario = new JLabel("Usu\u00E1rio");
@@ -166,26 +158,97 @@ public class janela_cadastro_cliente {
 		txt_usuario.setColumns(10);
 		txt_usuario.setBounds(57, 69, 158, 20);
 		frame.getContentPane().add(txt_usuario);
+		
+		try {
+			txt_celular = new JFormattedTextField(new MaskFormatter("(##) #####-####"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Celular Inválido!");
+			e1.printStackTrace();
+		}
+		txt_celular.setBounds(373, 104, 148, 20);
+		frame.getContentPane().add(txt_celular);
+		
+		try {
+			txt_cpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "CPF Inválido!");
+			e1.printStackTrace();
+		}
+		txt_cpf.setBounds(56, 139, 158, 20);
+		frame.getContentPane().add(txt_cpf);
+		
+		
+		try {
+			txt_dtnascimento = new JFormattedTextField(new MaskFormatter("##/##/####"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Data de Nascimento Inválida!");
+			e1.printStackTrace();
+		}
+		txt_dtnascimento.setBounds(129, 173, 86, 20);
+		frame.getContentPane().add(txt_dtnascimento);
+		
+		LocalDate datahoje = LocalDate.now(); 
+		String dthoje = datahoje.toString();
+		dthoje = montaDataHoje(dthoje);
+		try {
+			txt_dtcadastro = new JFormattedTextField(new MaskFormatter("##/##/####"));
+			txt_dtcadastro.setText(dthoje);
+			txt_dtcadastro.setEditable(false);
+			
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, "Data de Cadastro Inválida!");
+			e1.printStackTrace();
+		}
+		txt_dtcadastro.setBounds(129, 208, 86, 20);
+		frame.getContentPane().add(txt_dtcadastro);
+		
+		listarPermissoes();
+		PermissaoBox = new JComboBox<>();
+        if(cont>0) {
+        	for(int i=0;i<cont;i++)	{
+        		PermissaoBox.addItem(listarPermissoes[i]);
+        	}
+        	PermissaoBox.setSelectedItem(null);
+        }
+        PermissaoBox.action(null, PermissaoBox);
+        PermissaoBox.setBounds(435, 172, 86, 22);
+        frame.getContentPane().add(PermissaoBox);
+       /* if((String)PermissaoBox.getSelectItem()!=null) {
+        	PermissaoBox.setEnable(true);
+        }
+        else {
+        	PermissaoBox.setEnabled(false);
+        }*/
+
+        
 	}
 	
+
 	private void cadastrar() {
 		
 		Connection conexao =   null;
 		PreparedStatement  comando  =  null;
+		
+	
 		//INSERT NA TABELA DE USUARIOS
 		try {
 			conexao = ClasseConexao.Conectar();
-			String sql = "INSERT INTO usuarios (usuario, senha) VALUES (?,?)";
+			String sql = "INSERT INTO usuarios (usuario, senha,permissao) VALUES (?,?,?)";
 			comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			comando.setString(1, txt_usuario.getText());
-			comando.setString(2, generateRandomPassword(12));	
+			comando.setString(2, generateRandomPassword(12));
+			comando.setString(3, PermissaoBox.getSelectedItem().toString());
 					
 			// Vamos executar o comando verificar se deu certo:
 			if(comando.executeUpdate()>0) {
 				ResultSet resultado = comando.getGeneratedKeys();
 				if(resultado.next()) {
 					//System.out.println("dados gravados no codigo:" + resultado.getInt(1));
-					JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+					//JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
 				}
 			}
 			
@@ -207,18 +270,24 @@ public class janela_cadastro_cliente {
 			comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			comando.setString(1, txt_nome.getText());
 			comando.setString(2, txt_cpf.getText());
-			comando.setString(3, txt_dtnascimento.getText());
-			comando.setString(4, txt_dtcadastro.getText());
+			String txt1 = txt_dtnascimento.getText();
+			comando.setString(3, montaData(txt1));
+			String txt2 = txt_dtcadastro.getText();
+			comando.setString(4, montaData(txt2));
 			comando.setString(5, txt_email.getText());
-			comando.setString(6, txt_celular.getText());	
-			comando.setString(7, txt_codusuario.getText());
-			
+			String celular = txt_celular.getText();
+			comando.setString(6, trataCelular(celular));
+			//QUANDO SE TEM UM .setText(), não precisa informar denovo
+			comando.setString(7, txt_codusuario.getText());			
 					
 			// Vamos executar o comando verificar se deu certo:
 			if(comando.executeUpdate()>0) {
 				ResultSet resultado = comando.getGeneratedKeys();
 				if(resultado.next()) {
-					System.out.println("dados gravados no codigo:" + resultado.getInt(1));
+					//System.out.println("dados gravados no codigo:" + resultado.getInt(1));
+					JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+					frame.dispose();
+					janela_home_admin.main(null);
 				}
 			}
 			
@@ -235,6 +304,42 @@ public class janela_cadastro_cliente {
 		}
 	}
 	
+    public void listarPermissoes() {
+    	
+		Connection conexao 	=  null;
+		Statement  comando  =  null;
+		ResultSet  resultado = null;
+		
+		try {
+			conexao = ClasseConexao.Conectar();
+			comando = conexao.createStatement();
+			String meu_sql ="SELECT DISTINCT permissao FROM `permissoes`";
+			resultado = comando.executeQuery(meu_sql);
+			while(resultado.next()) {
+				//System.out.println(resultado.getInt("cod_carro")+ "  "+ resultado.getString("tipo")+"  "+ resultado.getString("modelo")+ "  "+ resultado.getString("cor")+ "  "+resultado.getDouble("potencia")+"  "+ resultado.getDouble("ano")+ "  "+ resultado.getDouble("diaria"));
+				try {
+						listarPermissoes[cont] = resultado.getString("permissao");
+						cont++;
+				}catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			ClasseConexao.FecharConexao(conexao);
+			try {
+				comando.close();
+				resultado.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+    }
+	
 	public static String generateRandomPassword(int len) {
 			String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi"
 	          +"jklmnopqrstuvwxyz!@#$%&";
@@ -244,4 +349,62 @@ public class janela_cadastro_cliente {
 				sb.append(chars.charAt(rnd.nextInt(chars.length())));
 			return sb.toString();
 		}
+
+	public String montaData(String str) {
+		int tamanho = str.length();
+		String dataformatada= str.substring(6,10) + "-" + str.substring(3,5) + "-" + str.substring(0,2);
+		return dataformatada;
+	}
+	
+	public String montaDataHoje(String str) {
+		int tamanho = str.length();
+		String dataformatada= str.substring(8,10) + "/" + str.substring(5,7) + "/" + str.substring(0,4);
+		return dataformatada;
+	}
+	
+	public String trataCelular(String str) {
+		int tamanho = str.length();
+		String celular= str.replace(" ","");
+		celular = celular.replace("(", "");
+		celular = celular.replace(")", "-");
+		celular = celular.replace("-", "");
+		return celular;
+	}
+
+	public String pegaProxId() {
+		
+		Connection conexao =   null;
+		Statement  comando  =  null;
+		ResultSet  resultado = null;
+		String codigo ="";
+		
+		try {
+			
+			conexao = ClasseConexao.Conectar();
+			comando = conexao.createStatement();
+			String meu_sql ="SELECT MAX(codigo) FROM usuarios";
+			resultado = comando.executeQuery(meu_sql);
+			while(resultado.next()) {
+				  codigo = String.valueOf(resultado.getInt(1)+1);
+				}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			ClasseConexao.FecharConexao(conexao);
+			try {
+				comando.close();
+				resultado.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return codigo;
+	}
+
+	private String String(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
