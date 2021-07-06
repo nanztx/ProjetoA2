@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
+
 import Banco_dados.ClasseConexao;
 
 public class janela_cadastro_cliente {
@@ -291,6 +293,8 @@ public class janela_cadastro_cliente {
 				}
 			}
 			
+		}	catch (MysqlDataTruncation e) {
+			JOptionPane.showMessageDialog(null, "Informação ultrapassa o numero de dígitos disponibilizado no campo");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
