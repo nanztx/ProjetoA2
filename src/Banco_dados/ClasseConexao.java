@@ -10,6 +10,8 @@ public class ClasseConexao {
 	// Metodo para fazer conexãocom o MySQL;
 	public static Connection Conectar() {
 		try {
+			
+			//ALTERAÇÃO DEMO 05072021 AQUI CHEGOU
 			// Verificar primeiro se a conexão foi já foi feita:
 			if(conexao==null) {
 				// Vamos criar um string contendo o caminho do banco de dados:
