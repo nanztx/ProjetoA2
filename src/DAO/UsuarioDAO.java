@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
+import java.util.Random;
+
+import javax.swing.JOptionPane;
 
 import Banco_dados.ClasseConexao;
 
@@ -80,5 +84,50 @@ public class UsuarioDAO {
 		}
 		return nextCodigo;
 	}
-}
 
+	public static String alteraSenhaDAO(int i , String j) {
+		
+		int idRecebida	= 0;
+		String senhaResetada = "";
+		
+		idRecebida = i;
+		senhaResetada = j;
+		
+		
+		Connection conexao = null;
+		PreparedStatement comando = null;
+
+		try {
+			conexao = ClasseConexao.Conectar();
+			String sql = "UPDATE `usuarios` SET `senha`=? WHERE `codigo`=?";
+			comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			comando.setString(1, senhaResetada);
+			comando.setInt(2, idRecebida);
+
+			// Vamos executar o comando verificar se deu certo:
+			if (comando.executeUpdate() > 0) {
+				
+				JOptionPane.showMessageDialog(null, "Senha do usuario "+ idRecebida +" alterada para: \n"+ senhaResetada);
+				
+				ResultSet resultado = comando.getGeneratedKeys();
+				if (resultado.next()) {
+					//JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
+					// frame.dispose();
+					// janela_home_admin.main(null);
+				}
+			}
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ClasseConexao.FecharConexao(conexao);
+			try {
+				comando.close();
+
+			}  catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return senhaResetada;
+}
+}

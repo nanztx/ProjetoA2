@@ -25,6 +25,8 @@ import javax.swing.text.MaskFormatter;
 import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 
 import Banco_dados.ClasseConexao;
+import DAO.UsuarioDAO;
+import aplicação.Usuario;
 
 public class janela_cadastro_cliente {
 
@@ -242,7 +244,7 @@ public class janela_cadastro_cliente {
 			String sql = "INSERT INTO usuarios (usuario, senha,permissao) VALUES (?,?,?)";
 			comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			comando.setString(1, txt_usuario.getText());
-			comando.setString(2, generateRandomPassword(12));
+			comando.setString(2, Usuario.generateRandomPassword(12));
 			comando.setString(3, PermissaoBox.getSelectedItem().toString());
 					
 			// Vamos executar o comando verificar se deu certo:
@@ -344,16 +346,6 @@ public class janela_cadastro_cliente {
 		}
     }
 	
-	public static String generateRandomPassword(int len) {
-			String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi"
-	          +"jklmnopqrstuvwxyz!@#$%&";
-			Random rnd = new Random();
-			StringBuilder sb = new StringBuilder(len);
-			for (int i = 0; i < len; i++)
-				sb.append(chars.charAt(rnd.nextInt(chars.length())));
-			return sb.toString();
-		}
-
 	public String montaData(String str) {
 		int tamanho = str.length();
 		String dataformatada= str.substring(6,10) + "-" + str.substring(3,5) + "-" + str.substring(0,2);

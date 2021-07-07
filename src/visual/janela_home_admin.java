@@ -88,6 +88,12 @@ public class janela_home_admin {
 		frmRentIt.getContentPane().add(btn_alterarUsuario);
 		
 		JButton btn_removerUsuario = new JButton("Remover Usu\u00E1rio");
+		btn_removerUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmRentIt.dispose();
+				janela_excluir_usuario.main(null);
+			}
+		});
 		btn_removerUsuario.setBounds(10, 120, 167, 23);
 		frmRentIt.getContentPane().add(btn_removerUsuario);
 		
