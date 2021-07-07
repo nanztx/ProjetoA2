@@ -1,6 +1,6 @@
 package visual;
 
-import java.awt.EventQueue;
+import java.awt.EventQueue;	
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,6 +44,7 @@ public class janela_home_admin {
 		frmRentIt = new JFrame();
 		frmRentIt.setTitle("RENT IT");
 		frmRentIt.setBounds(100, 100, 495, 343);
+		frmRentIt.setLocationRelativeTo(null);
 		frmRentIt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRentIt.getContentPane().setLayout(null);
 		
@@ -98,6 +99,12 @@ public class janela_home_admin {
 		frmRentIt.getContentPane().add(btn_removerUsuario);
 		
 		JButton btn_cadastrarVeiculo = new JButton("Cadastrar Ve\u00EDculo");
+		btn_cadastrarVeiculo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmRentIt.dispose();
+				janela_cadastro_veiculo.main(null);
+			}
+		});
 		btn_cadastrarVeiculo.setBounds(10, 202, 167, 23);
 		frmRentIt.getContentPane().add(btn_cadastrarVeiculo);
 		
@@ -107,7 +114,7 @@ public class janela_home_admin {
 		
 		JButton btn_removerVeiculo = new JButton("Remover Ve\u00EDculo");
 		btn_removerVeiculo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {	
 			}
 		});
 		btn_removerVeiculo.setBounds(10, 270, 167, 23);

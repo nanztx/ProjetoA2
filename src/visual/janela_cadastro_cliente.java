@@ -73,6 +73,7 @@ public class janela_cadastro_cliente {
 		frmRentIt = new JFrame();
 		frmRentIt.setTitle("RENT IT - Cadastro de Usu\u00E1rio");
 		frmRentIt.setBounds(100, 100, 565, 336);
+		frmRentIt.setLocationRelativeTo(null);
 		frmRentIt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRentIt.getContentPane().setLayout(null);
 		

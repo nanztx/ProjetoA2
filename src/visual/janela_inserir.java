@@ -67,6 +67,7 @@ public class janela_inserir {
 		frmInserirVeiculo.setFont(new Font("Dialog", Font.ITALIC, 16));
 		frmInserirVeiculo.setTitle("Inserir Veiculo");
 		frmInserirVeiculo.setBounds(100, 100, 450, 407);
+		frmInserirVeiculo.setLocationRelativeTo(null);
 		frmInserirVeiculo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmInserirVeiculo.getContentPane().setLayout(null);
 		

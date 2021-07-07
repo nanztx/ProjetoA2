@@ -72,6 +72,7 @@ public class janela_altera_usuario {
 		frmRentIt = new JFrame();
 		frmRentIt.setTitle("Rent It - Alterar Usu\u00E1rios");
 		frmRentIt.setBounds(100, 100, 451, 346);
+		frmRentIt.setLocationRelativeTo(null);
 		frmRentIt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRentIt.getContentPane().setLayout(null);
 
@@ -182,7 +183,7 @@ public class janela_altera_usuario {
 
 			conexao = ClasseConexao.Conectar();
 			comando = conexao.createStatement();
-			String meu_sql = "SELECT `codigo`, `usuario`, `permissao` FROM `usuarios`";
+			String meu_sql = "SELECT codigo, usuario, permissao FROM `usuarios`";
 			resultado = comando.executeQuery(meu_sql);
 			table.setModel(DbUtils.resultSetToTableModel(resultado));
 
@@ -208,7 +209,7 @@ public class janela_altera_usuario {
 
 		try {
 			conexao = ClasseConexao.Conectar();
-			String sql = "UPDATE usuarios SET usuario=?, permissao=? WHERE codigo=?";
+			String sql = "UPDATE usuarios SET usuario=?, permissao=? WHERE codigo=? AND deleted<>'*'";
 			comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			comando.setString(1, usuario);
 			comando.setString(2, permissao);

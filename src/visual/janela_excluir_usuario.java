@@ -1,20 +1,9 @@
 package visual;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-
-import Banco_dados.ClasseConexao;
-import net.proteanit.sql.DbUtils;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,8 +11,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+
+import Banco_dados.ClasseConexao;
+import net.proteanit.sql.DbUtils;
 
 public class janela_excluir_usuario {
 
@@ -60,6 +56,7 @@ public class janela_excluir_usuario {
 		frmRentIt = new JFrame();
 		frmRentIt.setTitle("Rent It - Exclus\u00E3o de  Usu\u00E1rios");
 		frmRentIt.setBounds(100, 100, 450, 300);
+		frmRentIt.setLocationRelativeTo(null);
 		frmRentIt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRentIt.getContentPane().setLayout(null);
 
@@ -105,7 +102,7 @@ public class janela_excluir_usuario {
 		listarUsuariosExc();
 	}
 
-	@SuppressWarnings({ "serial", "deprecation" })
+
 	public void listarUsuariosExc() {
 		Connection conexao = null;
 		Statement comando = null;
@@ -115,7 +112,7 @@ public class janela_excluir_usuario {
 
 			conexao = ClasseConexao.Conectar();
 			comando = conexao.createStatement();
-			String meu_sql = "SELECT `codigo`, `usuario`, `permissao` FROM `usuarios`";
+			String meu_sql = "SELECT codigo, usuario, permissao FROM usuarios";
 			resultado = comando.executeQuery(meu_sql);
 			tableUsuarios.setModel(DbUtils.resultSetToTableModel(resultado));
 
@@ -144,7 +141,7 @@ public class janela_excluir_usuario {
 		
 		try {
 			conexao = ClasseConexao.Conectar();
-			String sql = "DELETE FROM usuarios  WHERE codigo=?";
+			String sql = "DELETE FROM usuarios  WHERE codigo=? and deleted <>'*'";
 			comando = conexao.prepareStatement(sql);
 			comando.setInt(1,id);
 			

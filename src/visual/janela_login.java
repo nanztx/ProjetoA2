@@ -56,6 +56,7 @@ public class janela_login {
 		frmRentIt = new JFrame();
 		frmRentIt.setTitle("RENT IT");
 		frmRentIt.setBounds(100, 100, 450, 300);
+		frmRentIt.setLocationRelativeTo(null);
 		frmRentIt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRentIt.getContentPane().setLayout(null);
 		
