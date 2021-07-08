@@ -22,6 +22,8 @@ import javax.swing.JFormattedTextField;
 import java.awt.Window.Type;
 import javax.swing.JTable;
 import javax.swing.JPasswordField;
+import java.awt.Toolkit;
+import java.awt.Dialog.ModalExclusionType;
 
 public class janela_agenda {
 
@@ -60,6 +62,8 @@ public class janela_agenda {
 	 */
 	private void initialize() {
 		frmAgendaDeCarros = new JFrame();
+		frmAgendaDeCarros.setResizable(false);
+		frmAgendaDeCarros.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\rauan\\Desktop\\esse.jpg"));
 		frmAgendaDeCarros.setTitle("Agenda de Carros");
 		frmAgendaDeCarros.setBounds(100, 100, 648, 402);
 		frmAgendaDeCarros.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,10 +101,6 @@ public class janela_agenda {
 		btnNewButton.setBounds(258, 315, 111, 23);
 		frmAgendaDeCarros.getContentPane().add(btnNewButton);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("");
-		lblNewLabel_1_2.setBounds(392, 116, 128, 24);
-		frmAgendaDeCarros.getContentPane().add(lblNewLabel_1_2);
-		
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setFont(new Font("Calibri", Font.BOLD, 15));
 		lblNome.setBounds(10, 11, 103, 30);
@@ -134,5 +134,10 @@ public class janela_agenda {
 		table = new JTable();
 		table.setBounds(414, 116, 1, 1);
 		frmAgendaDeCarros.getContentPane().add(table);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\rauan\\Desktop\\esta.png"));
+		lblNewLabel_1.setBounds(462, 36, 103, 113);
+		frmAgendaDeCarros.getContentPane().add(lblNewLabel_1);
 	}
 }
