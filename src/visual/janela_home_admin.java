@@ -109,12 +109,20 @@ public class janela_home_admin {
 		frmRentIt.getContentPane().add(btn_cadastrarVeiculo);
 		
 		JButton btn_cadastrarUsuario_4 = new JButton("Alterar Ve\u00EDculo");
+		btn_cadastrarUsuario_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmRentIt.dispose();
+				janela_altera_veiculo.main(null);
+			}
+		});
 		btn_cadastrarUsuario_4.setBounds(10, 236, 167, 23);
 		frmRentIt.getContentPane().add(btn_cadastrarUsuario_4);
 		
 		JButton btn_removerVeiculo = new JButton("Remover Ve\u00EDculo");
 		btn_removerVeiculo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
+				frmRentIt.dispose();
+				janela_excluir_veiculo.main(null);
 			}
 		});
 		btn_removerVeiculo.setBounds(10, 270, 167, 23);

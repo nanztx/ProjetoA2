@@ -19,6 +19,8 @@ import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class janela_login {
 
@@ -61,6 +63,14 @@ public class janela_login {
 		frmRentIt.getContentPane().setLayout(null);
 		
 		txt_usuario = new JTextField();
+		txt_usuario.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				String texto = "";
+				texto = txt_usuario.getText().toUpperCase();
+				txt_usuario.setText(texto);
+			}
+		});
 		txt_usuario.setText("Usu\u00E1rio");
 		txt_usuario.setBounds(161, 112, 98, 20);
 		frmRentIt.getContentPane().add(txt_usuario);

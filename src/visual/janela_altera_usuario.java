@@ -16,6 +16,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -142,6 +144,17 @@ public class janela_altera_usuario {
 		frmRentIt.getContentPane().add(scrollPane);
 
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override			//BLOQUEAR EDIÇÃO DE COLUNA CÓDIGO VALIOSÍSSIMO
+			public void mouseClicked(MouseEvent e) {
+				int columnIndex= 0;
+				columnIndex = table.getSelectedColumn ();
+		        //System.out.println ( "Double click on jtable" );
+		        if ( columnIndex == 0) {
+		            JOptionPane.showMessageDialog ( null , "Não é permitido alterar a coluna COD_USUARIO!" , "ALERTA Não é Permitida Edição Deste Campo" , JOptionPane.ERROR_MESSAGE );
+		        }
+			}
+		});
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 
@@ -209,7 +222,7 @@ public class janela_altera_usuario {
 
 		try {
 			conexao = ClasseConexao.Conectar();
-			String sql = "UPDATE usuarios SET usuario=?, permissao=? WHERE codigo=? AND deleted<>'*'";
+			String sql = "UPDATE usuarios SET usuario=?, permissao=? WHERE codigo=? ";
 			comando = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			comando.setString(1, usuario);
 			comando.setString(2, permissao);
