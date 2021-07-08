@@ -28,6 +28,7 @@ import javax.swing.text.MaskFormatter;
 import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 
 import Banco_dados.ClasseConexao;
+import javax.swing.ImageIcon;
 
 public class janela_cadastro_veiculo {
 
@@ -96,7 +97,7 @@ public class janela_cadastro_veiculo {
 				cadastrarVeiculo();
 			}
 		});
-		btnCadastrar.setBounds(399, 227, 89, 23);
+		btnCadastrar.setBounds(402, 240, 89, 23);
 		frmRentIt.getContentPane().add(btnCadastrar);
 
 		JButton btnCancelar = new JButton("Cancelar");
@@ -106,56 +107,56 @@ public class janela_cadastro_veiculo {
 				janela_home_admin.main(null);
 			}
 		});
-		btnCancelar.setBounds(282, 227, 89, 23);
+		btnCancelar.setBounds(282, 240, 89, 23);
 		frmRentIt.getContentPane().add(btnCancelar);
 
 		JLabel lbl_cadastroUsuario = new JLabel("CADASTRO DE VE\u00CDCULOS");
 		lbl_cadastroUsuario.setFont(new Font("Calibri", Font.BOLD, 14));
-		lbl_cadastroUsuario.setBounds(10, 11, 194, 24);
+		lbl_cadastroUsuario.setBounds(189, 27, 150, 24);
 		frmRentIt.getContentPane().add(lbl_cadastroUsuario);
 
 		JLabel lbl_modelo = new JLabel("Modelo:");
 		lbl_modelo.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lbl_modelo.setBounds(10, 89, 47, 24);
+		lbl_modelo.setBounds(10, 119, 47, 24);
 		frmRentIt.getContentPane().add(lbl_modelo);
 
 		JLabel lbl_marca = new JLabel("Marca:");
 		lbl_marca.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lbl_marca.setBounds(10, 54, 47, 24);
+		lbl_marca.setBounds(10, 84, 47, 24);
 		frmRentIt.getContentPane().add(lbl_marca);
 
 		JLabel lbl_tipo = new JLabel("Tipo:");
 		lbl_tipo.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lbl_tipo.setBounds(10, 124, 47, 24);
+		lbl_tipo.setBounds(10, 154, 47, 24);
 		frmRentIt.getContentPane().add(lbl_tipo);
 
 		JLabel lbl_cor = new JLabel("Cor:");
 		lbl_cor.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lbl_cor.setBounds(10, 159, 47, 24);
+		lbl_cor.setBounds(10, 189, 47, 24);
 		frmRentIt.getContentPane().add(lbl_cor);
 
 		JLabel lbl_placa = new JLabel("Placa:");
 		lbl_placa.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lbl_placa.setBounds(282, 54, 65, 24);
+		lbl_placa.setBounds(282, 84, 65, 24);
 		frmRentIt.getContentPane().add(lbl_placa);
 
 		JLabel lbl_potencia = new JLabel("Pot\u00EAncia (CV's):");
 		lbl_potencia.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lbl_potencia.setBounds(282, 89, 96, 24);
+		lbl_potencia.setBounds(282, 119, 96, 24);
 		frmRentIt.getContentPane().add(lbl_potencia);
 
 		JLabel lbl_ano_fabricacao = new JLabel("Ano de Fabrica\u00E7\u00E3o:");
 		lbl_ano_fabricacao.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lbl_ano_fabricacao.setBounds(282, 124, 160, 24);
+		lbl_ano_fabricacao.setBounds(282, 154, 160, 24);
 		frmRentIt.getContentPane().add(lbl_ano_fabricacao);
 
 		JLabel lbl_valor_diaria = new JLabel("Valor de Di\u00E1ria:");
 		lbl_valor_diaria.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lbl_valor_diaria.setBounds(282, 159, 121, 24);
+		lbl_valor_diaria.setBounds(282, 189, 121, 24);
 		frmRentIt.getContentPane().add(lbl_valor_diaria);
 
 		txt_potencia = new JTextField();
-		txt_potencia.setBounds(402, 89, 86, 20);
+		txt_potencia.setBounds(402, 119, 86, 20);
 		frmRentIt.getContentPane().add(txt_potencia);
 		txt_potencia.setColumns(10);
 
@@ -184,7 +185,7 @@ public class janela_cadastro_veiculo {
 				coresBox.addItem(listarCores[contacor]); } 
 			coresBox.setSelectedItem(null); }
 		coresBox.action(null, coresBox); 
-		coresBox.setBounds(67, 158, 128, 22);
+		coresBox.setBounds(67, 188, 128, 22);
 		frmRentIt.getContentPane().add(coresBox);
 
 
@@ -195,7 +196,7 @@ public class janela_cadastro_veiculo {
 			JOptionPane.showMessageDialog(null, "Placa Inválida!");
 			e1.printStackTrace();
 		}
-		txt_placa.setBounds(328, 54, 160, 21);
+		txt_placa.setBounds(327, 84, 160, 21);
 		frmRentIt.getContentPane().add(txt_placa);
 
 		JFormattedTextField txt_valorDiaria = new JFormattedTextField();
@@ -212,12 +213,12 @@ public class janela_cadastro_veiculo {
 				valorFormatado = txt_valorDiaria.getText();
 			}
 		});
-		txt_valorDiaria.setBounds(399, 159, 89, 21);
+		txt_valorDiaria.setBounds(402, 189, 89, 21);
 		frmRentIt.getContentPane().add(txt_valorDiaria);
 
 		txt_ano_fabricacao = new JTextField();
 		txt_ano_fabricacao.setColumns(10);
-		txt_ano_fabricacao.setBounds(415, 124, 73, 20);
+		txt_ano_fabricacao.setBounds(415, 154, 73, 20);
 		frmRentIt.getContentPane().add(txt_ano_fabricacao);
 		
 		
@@ -230,7 +231,7 @@ public class janela_cadastro_veiculo {
 				txt_modelo.setText(texto);
 			}
 		});
-		txt_modelo.setBounds(67, 54, 160, 21);
+		txt_modelo.setBounds(67, 89, 160, 21);
 		frmRentIt.getContentPane().add(txt_modelo);
 		
 		
@@ -244,7 +245,7 @@ public class janela_cadastro_veiculo {
 				
 			}
 		});
-		txt_marca.setBounds(67, 89, 160, 21);
+		txt_marca.setBounds(67, 123, 160, 21);
 		frmRentIt.getContentPane().add(txt_marca);
 		
 		
@@ -257,8 +258,13 @@ public class janela_cadastro_veiculo {
 				txt_marca.setText(texto);
 			}
 		});
-		txt_tipo.setBounds(67, 124, 160, 21);
+		txt_tipo.setBounds(67, 154, 160, 21);
 		frmRentIt.getContentPane().add(txt_tipo);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\rauan\\Desktop\\Sem t\u00EDtulo (8).png"));
+		lblNewLabel.setBounds(420, 0, 114, 66);
+		frmRentIt.getContentPane().add(lblNewLabel);
 
 	}
 
