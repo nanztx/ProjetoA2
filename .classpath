@@ -12,8 +12,18 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/usuario/git/ProjetoA2/Libraries/rs2xml.jar"/>
+	<classpathentry kind="lib" path="C:/Users/usuario/git/ProjetoA2/Libraries/rs2xml.jar" sourcepath="C:/Users/usuario/git/INCLUDES E BIBLIOTECAS/JPLANNER.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/usuario/git/INCLUDES%20E%20BIBLIOTECAS/JPLANNER/javadoc/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="jgoodies-common-1.8.0.jar" sourcepath="jgoodies-common-1.8.0-sources.jar"/>
 	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/usuario/git/ProjetoA2/Libraries/JPlanner.jar" sourcepath="C:/Users/usuario/git/INCLUDES E BIBLIOTECAS/JPLANNER.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/usuario/git/INCLUDES%20E%20BIBLIOTECAS/JPLANNER/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/usuario/git/ProjetoA2/Libraries/swt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

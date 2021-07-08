@@ -65,6 +65,7 @@ public class janela_agenda {
 		frmAgendaDeCarros.setResizable(false);
 		frmAgendaDeCarros.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\rauan\\Desktop\\esse.jpg"));
 		frmAgendaDeCarros.setTitle("Agenda de Carros");
+		frmAgendaDeCarros.setLocationRelativeTo(null);
 		frmAgendaDeCarros.setBounds(100, 100, 648, 402);
 		frmAgendaDeCarros.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAgendaDeCarros.getContentPane().setLayout(null);
