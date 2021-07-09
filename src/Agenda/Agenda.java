@@ -135,7 +135,8 @@ class Utility
 			  public void run() {
 				  if(display.isDisposed())
 					  return;
-				  button.setText("Number of appointments in the calendar: " + 
+				  //button.setText("Number of appointments in the calendar: " +
+				  button.setText("Numero atual de reservas: " + 
 					  String.valueOf(calendar.getSchedule().getItems().size()));
 			  }
 		  });
