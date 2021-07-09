@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -77,7 +78,22 @@ public class janela_excluir_veiculo {
 		lbl_veiculos.setBounds(10, 11, 184, 30);
 		frmRentIt.getContentPane().add(lbl_veiculos);
 		
-		JButton btnNewButton = new JButton("Alterar");
+		JButton btnNewButton = new JButton("Excluir");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int dialogResult=0;
+				int codigo=0;
+				codigo = Integer.parseInt(table.getValueAt(table.getSelectedRow(),0).toString());
+				dialogResult = JOptionPane.showConfirmDialog (null, "Você Realmente Deseja Excluir o Veículo "+codigo+"?","Warning",JOptionPane.YES_OPTION);
+				if(dialogResult == JOptionPane.YES_OPTION){
+				  // Saving code here
+
+					excluirVeiculos(codigo);
+					frmRentIt.dispose();
+					janela_excluir_veiculo.main(null);
+				}
+			}
+		});
 		btnNewButton.setBounds(685, 25, 89, 23);
 		frmRentIt.getContentPane().add(btnNewButton);
 		
@@ -130,4 +146,37 @@ public class janela_excluir_veiculo {
 
 	}
 	
+	public void excluirVeiculos(int codVeiculo) {
+		
+	Connection conexao =   null;
+	PreparedStatement  comando  =  null;
+	
+	int id = 0;
+	id = codVeiculo;
+	
+	try {
+		conexao = ClasseConexao.Conectar();
+		String sql = "DELETE FROM veiculos  WHERE cod_veiculo=? ";
+		comando = conexao.prepareStatement(sql);
+		comando.setInt(1,id);
+		
+		// Vamos executar o comando verificar se deu certo:
+		if(comando.executeUpdate()>0) {
+			//System.out.println("Usuário "+id+" excluído");
+			JOptionPane.showMessageDialog(null, "Veículo "+id+" excluído com sucesso");
+			
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		ClasseConexao.FecharConexao(conexao);
+		try {
+			comando.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}
 }
