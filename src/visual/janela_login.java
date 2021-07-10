@@ -92,7 +92,7 @@ public class janela_login {
 					janela_home_admin janela_home = new janela_home_admin();
 					janela_home.main(null);
 				}
-				else if(logou == "CLIENTE"){
+				else if(logou =="CLIENTE"){
 					frmRentIt.dispose();
 					janela_home_cliente janela_home_cli = new janela_home_cliente();
 					janela_home_cli.main(null);
@@ -121,7 +121,7 @@ public class janela_login {
 		String usuario 	= txt_usuario.getText();
 		String senha 	= txt_senha.getText();
 		String admin 	=	"ADMIN";
-		String cliente 	="CLIENTE";
+		String cliente 	= "CLIENTE";
 		String autentica = "";	
 		
 			Connection conexao =   null;
@@ -144,7 +144,7 @@ public class janela_login {
 					if (resultado.getString(4).trim().equals(admin.trim()) ) {
 						autentica = admin;
 					}
-					else if(resultado.getString(4).trim().equals(admin.trim()) ){
+					else if(resultado.getString(4).trim().equals(cliente.trim()) ){
 						autentica = cliente;
 					}
 					

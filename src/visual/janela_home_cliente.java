@@ -4,8 +4,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import Agenda.Agenda;
+
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class janela_home_cliente {
 
@@ -42,6 +47,7 @@ public class janela_home_cliente {
 		frmRentIt.setTitle("RENT IT");
 		frmRentIt.setBounds(100, 100, 450, 300);
 		frmRentIt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmRentIt.setLocationRelativeTo(null);
 		frmRentIt.getContentPane().setLayout(null);
 		
 		JLabel lbl_menuAdministrador = new JLabel("MENU USU\u00C1RIO");
@@ -54,6 +60,12 @@ public class janela_home_cliente {
 		frmRentIt.getContentPane().add(btn_cadastrarUsuario);
 		
 		JButton btn_cadastrarUsuario_1 = new JButton("Agendar Reserva");
+		btn_cadastrarUsuario_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmRentIt.dispose();
+				Agenda.main(null);
+			}
+		});
 		btn_cadastrarUsuario_1.setBounds(10, 60, 167, 23);
 		frmRentIt.getContentPane().add(btn_cadastrarUsuario_1);
 		

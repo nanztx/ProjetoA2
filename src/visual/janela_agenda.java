@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -15,24 +17,44 @@ import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import java.awt.Choice;
 import com.toedter.calendar.JDateChooser;
+
+import Banco_dados.ClasseConexao;
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import java.awt.Window.Type;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JTable;
 import javax.swing.JPasswordField;
 import java.awt.Toolkit;
 import java.awt.Dialog.ModalExclusionType;
+import javax.swing.JScrollPane;
+import javax.swing.JEditorPane;
+import javax.swing.JTabbedPane;
+import java.sql.Date;
 
 public class janela_agenda {
 
-	private JFrame frmAgendaDeCarros;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JFrame frame;
 	private JTable table;
+	private JComboBox<String> veiculosBox;
+	private String listarModelo[] = new String[100];
+	private String listarCodigo[] = new String[100];
+	JDateChooser dateChooser_inicio = new JDateChooser();
+	JDateChooser dateChooser_final = new JDateChooser();
 
 	/**
 	 * Launch the application.
@@ -42,7 +64,7 @@ public class janela_agenda {
 			public void run() {
 				try {
 					janela_agenda window = new janela_agenda();
-					window.frmAgendaDeCarros.setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -61,84 +83,219 @@ public class janela_agenda {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmAgendaDeCarros = new JFrame();
-		frmAgendaDeCarros.setResizable(false);
-		frmAgendaDeCarros.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\rauan\\Desktop\\esse.jpg"));
-		frmAgendaDeCarros.setTitle("Agenda de Carros");
-		frmAgendaDeCarros.setLocationRelativeTo(null);
-		frmAgendaDeCarros.setBounds(100, 100, 648, 402);
-		frmAgendaDeCarros.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAgendaDeCarros.getContentPane().setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("Marca do Carro:");
-		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 15));
-		lblNewLabel.setBounds(10, 52, 103, 30);
-		frmAgendaDeCarros.getContentPane().add(lblNewLabel);
-		
-		JLabel lblModelo = new JLabel("Modelo:");
-		lblModelo.setFont(new Font("Calibri", Font.BOLD, 15));
-		lblModelo.setBounds(10, 93, 103, 30);
-		frmAgendaDeCarros.getContentPane().add(lblModelo);
-		
+		frame = new JFrame();
+		frame.setResizable(false);
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\rauan\\Desktop\\esse.jpg"));
+		frame.setTitle("Agenda de Carros");
+		frame.setLocationRelativeTo(null);
+		frame.setBounds(100, 100, 795, 435);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+
 		JLabel lblDataIncioDa = new JLabel("Data In\u00EDcio da Loca\u00E7\u00E3o:");
 		lblDataIncioDa.setFont(new Font("Calibri", Font.BOLD, 15));
-		lblDataIncioDa.setBounds(10, 244, 143, 25);
-		frmAgendaDeCarros.getContentPane().add(lblDataIncioDa);
-		
+		lblDataIncioDa.setBounds(10, 311, 143, 25);
+		frame.getContentPane().add(lblDataIncioDa);
+
 		JLabel lblDataFinalDa = new JLabel("Data Final da Loca\u00E7\u00E3o:");
 		lblDataFinalDa.setFont(new Font("Calibri", Font.BOLD, 15));
-		lblDataFinalDa.setBounds(337, 244, 143, 20);
-		frmAgendaDeCarros.getContentPane().add(lblDataFinalDa);
-		
+		lblDataFinalDa.setBounds(10, 342, 143, 20);
+		frame.getContentPane().add(lblDataFinalDa);
+
 		JDateChooser dateChooser_inicio = new JDateChooser();
-		dateChooser_inicio.setBounds(152, 244, 143, 20);
-		frmAgendaDeCarros.getContentPane().add(dateChooser_inicio);
+		dateChooser_inicio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				java.util.Date teste = dateChooser_inicio.getDate();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String date ="";
+				//dateChooser_inicio.setDate();
+				date = sdf.format(dateChooser_inicio.getDate());
+			}
+		});
+		dateChooser_inicio.setBounds(163, 316, 143, 20);
+		frame.getContentPane().add(dateChooser_inicio);
+
 		
+
 		JDateChooser dateChooser_final = new JDateChooser();
-		dateChooser_final.setBounds(479, 242, 143, 20);
-		frmAgendaDeCarros.getContentPane().add(dateChooser_final);
-		
+		dateChooser_final.setBounds(163, 342, 143, 20);
+		frame.getContentPane().add(dateChooser_final);
+
 		JButton btnNewButton = new JButton("Agendar");
-		btnNewButton.setBounds(258, 315, 111, 23);
-		frmAgendaDeCarros.getContentPane().add(btnNewButton);
-		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setFont(new Font("Calibri", Font.BOLD, 15));
-		lblNome.setBounds(10, 11, 103, 30);
-		frmAgendaDeCarros.getContentPane().add(lblNome);
-		
-		textField = new JTextField();
-		textField.setBounds(118, 14, 238, 20);
-		frmAgendaDeCarros.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(118, 55, 238, 20);
-		frmAgendaDeCarros.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblDisponibilidade = new JLabel("Disponibilidade:");
-		lblDisponibilidade.setFont(new Font("Calibri", Font.BOLD, 15));
-		lblDisponibilidade.setBounds(10, 134, 103, 30);
-		frmAgendaDeCarros.getContentPane().add(lblDisponibilidade);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(118, 96, 238, 20);
-		frmAgendaDeCarros.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(118, 137, 238, 20);
-		frmAgendaDeCarros.getContentPane().add(textField_3);
-		
+		btnNewButton.setBounds(613, 31, 111, 23);
+		frame.getContentPane().add(btnNewButton);
+
 		table = new JTable();
 		table.setBounds(414, 116, 1, 1);
-		frmAgendaDeCarros.getContentPane().add(table);
+		frame.getContentPane().add(table);
+
+		JLabel lbl_veiculos = new JLabel("RESERVA DE AGENDAS");
+		lbl_veiculos.setFont(new Font("Calibri", Font.BOLD, 14));
+		lbl_veiculos.setBounds(10, 15, 184, 30);
+		frame.getContentPane().add(lbl_veiculos);
+
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\rauan\\Desktop\\esta.png"));
-		lblNewLabel_1.setBounds(462, 36, 103, 113);
-		frmAgendaDeCarros.getContentPane().add(lblNewLabel_1);
+		listarVeiculos();
+		int cont= countVeiculos();
+		veiculosBox = new JComboBox<>();
+		veiculosBox.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				String carro ="";
+				int codigo=0;
+				carro = listarCodigo[veiculosBox.getSelectedIndex()];
+				codigo = Integer. valueOf(carro);
+				
+				
+				listaVeiculoAgenda(codigo);
+			}
+		});
+		if(cont>0) {
+			for(int i=0;i<cont;i++)	{
+				veiculosBox.addItem(listarModelo[i]);
+				listarCodigo[i] = listarCodigo[i] ;
+			}
+			veiculosBox.setSelectedItem(null);
+		}
+		veiculosBox.action(null, veiculosBox);
+		veiculosBox.setBounds(10, 56, 128, 22);
+		frame.getContentPane().add(veiculosBox);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(47, 116, 622, 148);
+		frame.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override			//BLOQUEAR EDIÇÃO DE COLUNA CÓDIGO VALIOSÍSSIMO
+			public void mouseClicked(MouseEvent e) {
+				int columnIndex= 0;
+				columnIndex = table.getSelectedColumn ();
+		        //System.out.println ( "Double click on jtable" );
+		        if ( columnIndex == 0) {
+		            JOptionPane.showMessageDialog ( null , "Não é permitido alterar a coluna CODIGO!" , "ALERTA Não é Permitida Edição Deste Campo" , JOptionPane.ERROR_MESSAGE );
+		        }
+			}
+		});
+		scrollPane.setViewportView(table);
+
+		JButton btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				janela_home_admin.main(null);
+				
+			}
+		});
+		btn_cancelar.setBounds(451, 31, 89, 23);
+		frame.getContentPane().add(btn_cancelar);
+		
+		
+	}
+
+	public void listarVeiculos() {
+
+		int cont=0;
+
+		Connection conexao = null;
+		Statement comando = null;
+		ResultSet resultado = null;
+
+		try {
+
+			conexao = ClasseConexao.Conectar();
+			comando = conexao.createStatement();
+			String meu_sql = "SELECT `cod_veiculo`, `modelo`, `marca`, `tipo`, `cor`, `placa`, `potencia`, `ano`, `diaria` FROM `veiculos` ";
+			resultado = comando.executeQuery(meu_sql);
+
+			while(resultado.next()) {
+			listarModelo[cont] = resultado.getString("modelo");// +"-"+ resultado.getString("marca");
+			listarCodigo[cont] = resultado.getString("cod_veiculo");
+			cont++;
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			ClasseConexao.FecharConexao(conexao);
+			try {
+				comando.close();
+				resultado.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public int countVeiculos() {
+
+
+		String count ="";
+		int contVeiculos=0;
+		Connection conexao = null;
+		PreparedStatement comando = null;
+		ResultSet resultado = null;
+
+		try {
+
+			conexao = ClasseConexao.Conectar();
+			//comando = conexao.createStatement();
+			String meu_sql = "SELECT * FROM `veiculos` ";
+			comando = conexao.prepareStatement(meu_sql);
+			resultado = comando.executeQuery(meu_sql);
+
+			while(resultado.next()) {
+				contVeiculos++;
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			ClasseConexao.FecharConexao(conexao);
+			try {
+				comando.close();
+				resultado.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return contVeiculos;
+	}
+	
+	public void listaVeiculoAgenda(int carro) {
+
+		int carroRecebido =0;
+		carroRecebido = carro;
+		
+		Connection conexao = null;
+		Statement comando = null;
+		ResultSet resultado = null;
+
+		try {
+
+			conexao = ClasseConexao.Conectar();
+			comando = conexao.createStatement();
+			String meu_sql = "SELECT `codigo`, `data_da_reserva`, `data_final`, `nome_cliente`, `cod_carro`, `marca`, `modelo`, `disponibilidade`, `codigo_pai` FROM `agenda` WHERE `cod_carro`="+carroRecebido+" ";
+			resultado = comando.executeQuery(meu_sql);
+			
+			table.setModel(DbUtils.resultSetToTableModel(resultado));
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			ClasseConexao.FecharConexao(conexao);
+			try {
+				comando.close();
+				resultado.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }

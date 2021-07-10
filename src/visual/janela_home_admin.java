@@ -131,6 +131,8 @@ public class janela_home_admin {
 		JButton btn_cadastrarAgenda = new JButton("Cadastrar Agenda");
 		btn_cadastrarAgenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmRentIt.dispose();
+				janela_cadastro_agenda.main(null);
 			}
 		});
 		btn_cadastrarAgenda.setBounds(257, 52, 167, 23);

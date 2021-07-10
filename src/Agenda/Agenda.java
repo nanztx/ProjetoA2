@@ -27,25 +27,26 @@ public class Agenda {
 	public static void main (String [] args) {	
 		
 		Display display = new Display();
-		Shell shlRentIt = new Shell(display);
-		shlRentIt.setText("Rent IT - Visualizar Agenda");
-		shlRentIt.setLayout(null);
-		Composite composite = new Composite(shlRentIt, SWT.EMBEDDED | SWT.NO_BACKGROUND);
-		composite.setBounds(3, 3, 900, 430);
+		Shell shell = new Shell(display);
+		shell.setSize(688, 427);
+		shell.setText("Rent IT - Visualizar Agenda");
+		shell.setLayout(null);
+		Composite composite = new Composite(shell, SWT.EMBEDDED | SWT.NO_BACKGROUND);
+		composite.setBounds(3, 3, 450, 300);
 		
-		Frame frame = SWT_AWT.new_Frame(composite);
+		Frame frameit = SWT_AWT.new_Frame(composite);
 		Panel panel = new Panel(new java.awt.BorderLayout());
-		frame.add(panel);
+		frameit.add(panel);
 		
 		Calendar calendar = new Calendar();
 		calendar.setTheme(ThemeType.Light);
 		panel.add(calendar);
 		
-		Button button = new Button(shlRentIt, SWT.NONE);
+		Button button = new Button(shell, SWT.NONE);
 		button.setBounds(3, 436, 300, 40);
 		button.setText("Click to create a new calendar event");
 		
-		Button button1 = new Button(shlRentIt, SWT.NONE);
+		Button button1 = new Button(shell, SWT.NONE);
 		button1.setBounds(306, 436, 300, 40);
 		button1.setText("Number of appointments: 0");
 		
@@ -77,8 +78,8 @@ public class Agenda {
 		
 		
 		 // run the SWT event loop
-		 shlRentIt.open();
-		 while (!shlRentIt.isDisposed())
+		 shell.open();
+		 while (!shell.isDisposed())
 		 {
 			 	if (!display.readAndDispatch())
 			 	
